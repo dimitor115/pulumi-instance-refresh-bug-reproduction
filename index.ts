@@ -18,9 +18,11 @@ const group = new aws.ec2.SecurityGroup("pulumi-bug-reproduction-sg", {
     ],
 });
 
+const pageContent = 'Hello, World!' //<--- CHANGE STH HERE
+
 const userData =
     `#!/bin/bash
-echo "Hello, World! 2 !" > index.html
+echo "${pageContent}" > index.html
 nohup python -m SimpleHTTPServer 80 &`;
 
 const launchTemplate = new aws.ec2.LaunchTemplate("pulumi-bug-reproduction-template", {
